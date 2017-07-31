@@ -1,5 +1,10 @@
 # COMS-1
-Tools for COMS-1 LRIT satellite data
+Tools for COMS-1 LRIT satellite data. Requires Python 3.
+
+| Component     | Description   |
+| ------------- | ------------- |
+| [lrit-header.py](#lrit-headerpy)  | Parses LRIT file and displays header information in a human-readable format.  |
+| [lrit-additional.py](lrit-additionalpy)  | Extracts data from LRIT Additional Data (ADD) files.  |
 
 ## lrit-header.py
 Parses LRIT file and displays header information in a human-readable format.
@@ -68,15 +73,85 @@ python3.6 lrit-header.py -f samples/lrit/IMG_ENH_01_IR1_20120101_000920_01.lrit
 	Line num of segment:   1
 ```
 
+## lrit-additional.py
+Extracts data from LRIT Additional Data (ADD) files. Data includes Alpha-numeric text (ANT), CMDPS (CT/CTT/CTH), and GOCI.
+
+### Sample output (Alpha-numeric Text)
+```
+python3.6 lrit-additional.py -f samples/lrit/ADD_ANT_01_20120101_113500_00.lrit
+[Type 0 : Offset 0x0] Primary Header:
+	Header length:         16
+	File type:             2, Alpha-numeric text (ANT)
+	Total header length:   70 (0x46)
+	Data length:           78088 (0x13108)
+
+[Type 4 : Offset 0x10] Annotation Header:
+	Header length:         37 (0x25)
+	Text data:             "ADD_ANT_01_20120101_113500_00.lrit"
+
+[Type 5 : Offset 0x35] Time Stamp Header:
+	Header length:         10
+	P Field:               01000000
+	  - Extension flag:    0 (No extension)
+	  - Time code ID:      100 (1958 January 1 epoch - Level 1 Time Code)
+	  - Detail bits:       0000
+	T Field:               010011010000101100000001001110001010011010000011
+	  - Day counter:       19723 (02/01/2012 - DD/MM/YYYY)
+	  - Milliseconds:      20489859 (05:41:29 - HH:MM:SS)
+
+[Type 7 : Offset 0x3F] Key Header:
+	Header length:         7
+	Encryption key:        0x0 (disabled)
+
+Additional Data dumped to "samples/lrit/ADD_ANT_01_20120101_113500_00_DATA.txt"
+```
+
+### Sample output (CMDPS - CTH)
+```
+python3.6 lrit-additional.py -f samples/lrit/ADD_CTH_02_20120101_033200_00.lrit
+[Type 0 : Offset 0x0] Primary Header:
+	Header length:         16
+	File type:             128, COMS Meteorological Data Processing System (CMDPS) analysis data
+	Total header length:   70 (0x46)
+	Data length:           4689808 (0x478F90)
+
+[Type 4 : Offset 0x10] Annotation Header:
+	Header length:         37 (0x25)
+	Text data:             "ADD_CTH_02_20120101_033200_00.lrit"
+
+[Type 5 : Offset 0x35] Time Stamp Header:
+	Header length:         10
+	P Field:               01000000
+	  - Extension flag:    0 (No extension)
+	  - Time code ID:      100 (1958 January 1 epoch - Level 1 Time Code)
+	  - Detail bits:       0000
+	T Field:               010011010000101100000000101010101101100101101111
+	  - Day counter:       19723 (02/01/2012 - DD/MM/YYYY)
+	  - Milliseconds:      11196783 (03:06:36 - HH:MM:SS)
+
+[Type 7 : Offset 0x3F] Key Header:
+	Header length:         7
+	Encryption key:        0x0 (disabled)
+
+Additional Data dumped to "samples/lrit/ADD_CTH_02_20120101_033200_00_DATA.png"
+```
+
 ## Sample data
 LRIT and HRIT sample data was obtained from [Korea Meteorological Administration's (KMA) National Meteorological Satellite Center (NMSC)](http://nmsc.kma.go.kr/html/homepage/en/chollian/Introduction/selectIntroduction.do). Code examples and xRIT Mission Specific Implementation documents are also provided.
 
-## Sample VIS Image
+### VIS Image
 ![MI VIS 23.07.17 0515UTC](https://raw.githubusercontent.com/sam210723/COMS-1/master/samples/coms_mi_le1b_vis_cf_201707230515.png)
 Image obtained from [KMA NMSC](http://nmsc.kma.go.kr/html/homepage/en/satellite/searchSatelliteImageN.do?data_type=1001)
 
-## Sample Additional (ADD) data
-### Alpha-numeric Text (ANT)
+### Additional Data (ADD)
+Additional Data refers to:
+ * [Alpha-numeric Text (ANT)](#alpha-numeric-text-ant)
+ * COMS Meteorological Data Processing System (CMDPS) analysis data
+ * Numerical Weather Prediction (NWP) data
+ * Geostationary Ocean Color Imager (GOCI) data
+ * KMA typhoon information
+
+#### Alpha-numeric Text (ANT)
 ```
 COMS MI LRIT WOP(Weekly Operation Plan) 
 
@@ -107,7 +182,7 @@ TIME(UTC)        LRIT    ABBR_ID 02 03 04 05 06 07 08
 ```
 Alpha-numeric Text sample continued in [samples/lrit/ADD_ANT_01_20120101_113500_00_DATA.txt](samples/lrit/ADD_ANT_01_20120101_113500_00_DATA.txt)
 
-### Cloud images
+#### Cloud images
 Cloud Type (CT) | Cloud Top Height (CTH) | Cloud Top Temperature (CTT)
 ------------ | ------------- | -------------
 ![Cloud Type (CT)](samples/lrit/ADD_CT_02_20120101_032800_00_DATA.png) | ![Cloud Top Height (CTH)](samples/lrit/ADD_CTH_02_20120101_033200_00_DATA.png) | ![Cloud Top Temperature (CTT)](samples/lrit/ADD_CTT_02_20120101_033500_00_DATA.png)
