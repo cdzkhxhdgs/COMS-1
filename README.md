@@ -22,13 +22,13 @@ optional arguments:
 ```
 python3.6 lrit-header.py -f samples/lrit/IMG_ENH_01_IR1_20120101_000920_01.lrit
 [Type 0 : Offset 0x0] Primary Header:
-	Header length:         16
+	Header length:         16 (0x10)
 	File type:             0, Image data (IMG)
 	Total header length:   4972 (0x136C)
 	Data length:           3824184 (0x3A5A38)
 
 [Type 1 : Offset 0x10] Image Structure Header:
-	Header length:         9
+	Header length:         9 (0x9)
 	Bits per pixel:        8
 	Image:                 Extended Northern Hemisphere (ENH)
 	  - Columns: 1547
@@ -36,7 +36,7 @@ python3.6 lrit-header.py -f samples/lrit/IMG_ENH_01_IR1_20120101_000920_01.lrit
 	Compression:           0, None
 
 [Type 2 : Offset 0x19] Image Navigation Header:
-	Header length:         51
+	Header length:         51 (0x33)
 	Projection:            Normalized Geostationary Projection (GEOS)
 	Longitude:             128.2° E
 	Column scaling factor: 8170135
@@ -54,7 +54,7 @@ python3.6 lrit-header.py -f samples/lrit/IMG_ENH_01_IR1_20120101_000920_01.lrit
 	Text data:             "IMG_ENH_01_IR1_20120101_000920_01.lrit"
 
 [Type 5 : Offset 0x133F] Time Stamp Header:
-	Header length:         10
+	Header length:         10 (0xA)
 	P Field:               01000000
 	  - Extension flag:    0 (No extension)
 	  - Time code ID:      100 (1958 January 1 epoch - Level 1 Time Code)
@@ -64,11 +64,11 @@ python3.6 lrit-header.py -f samples/lrit/IMG_ENH_01_IR1_20120101_000920_01.lrit
 	  - Milliseconds:      85520000 (23:45:20 - HH:MM:SS)
 
 [Type 7 : Offset 0x1349] Key Header:
-	Header length:         7
+	Header length:         7 (0x7)
 	Encryption key:        0x0 (disabled)
 
 [Type 128 : Offset 0x1350] Image Segment Definition Header:
-	Header length:         7
+	Header length:         7 (0x7)
 	Segment number:        1 of 4
 	Line num of segment:   1
 ```
@@ -80,7 +80,7 @@ Extracts data from LRIT Additional Data (ADD) files. Data includes Alpha-numeric
 ```
 python3.6 lrit-additional.py -f samples/lrit/ADD_ANT_01_20120101_113500_00.lrit
 [Type 0 : Offset 0x0] Primary Header:
-	Header length:         16
+	Header length:         16 (0x10)
 	File type:             2, Alpha-numeric text (ANT)
 	Total header length:   70 (0x46)
 	Data length:           78088 (0x13108)
@@ -90,7 +90,7 @@ python3.6 lrit-additional.py -f samples/lrit/ADD_ANT_01_20120101_113500_00.lrit
 	Text data:             "ADD_ANT_01_20120101_113500_00.lrit"
 
 [Type 5 : Offset 0x35] Time Stamp Header:
-	Header length:         10
+	Header length:         10 (0xA)
 	P Field:               01000000
 	  - Extension flag:    0 (No extension)
 	  - Time code ID:      100 (1958 January 1 epoch - Level 1 Time Code)
@@ -100,7 +100,7 @@ python3.6 lrit-additional.py -f samples/lrit/ADD_ANT_01_20120101_113500_00.lrit
 	  - Milliseconds:      20489859 (05:41:29 - HH:MM:SS)
 
 [Type 7 : Offset 0x3F] Key Header:
-	Header length:         7
+	Header length:         7 (0x7)
 	Encryption key:        0x0 (disabled)
 
 Additional Data dumped to "samples/lrit/ADD_ANT_01_20120101_113500_00_DATA.txt"
@@ -110,7 +110,7 @@ Additional Data dumped to "samples/lrit/ADD_ANT_01_20120101_113500_00_DATA.txt"
 ```
 python3.6 lrit-additional.py -f samples/lrit/ADD_CTH_02_20120101_033200_00.lrit
 [Type 0 : Offset 0x0] Primary Header:
-	Header length:         16
+	Header length:         16 (0x10)
 	File type:             128, COMS Meteorological Data Processing System (CMDPS) analysis data
 	Total header length:   70 (0x46)
 	Data length:           4689808 (0x478F90)
@@ -120,7 +120,7 @@ python3.6 lrit-additional.py -f samples/lrit/ADD_CTH_02_20120101_033200_00.lrit
 	Text data:             "ADD_CTH_02_20120101_033200_00.lrit"
 
 [Type 5 : Offset 0x35] Time Stamp Header:
-	Header length:         10
+	Header length:         10 (0xA)
 	P Field:               01000000
 	  - Extension flag:    0 (No extension)
 	  - Time code ID:      100 (1958 January 1 epoch - Level 1 Time Code)
@@ -130,7 +130,7 @@ python3.6 lrit-additional.py -f samples/lrit/ADD_CTH_02_20120101_033200_00.lrit
 	  - Milliseconds:      11196783 (03:06:36 - HH:MM:SS)
 
 [Type 7 : Offset 0x3F] Key Header:
-	Header length:         7
+	Header length:         7 (0x7)
 	Encryption key:        0x0 (disabled)
 
 Additional Data dumped to "samples/lrit/ADD_CTH_02_20120101_033200_00_DATA.png"
