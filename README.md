@@ -2,8 +2,20 @@
 Tools for COMS-1 LRIT satellite data
 
 ## lrit-header.py
-Sample output using ``samples/lrit/IMG_ENH_01_IR1_20120101_000920_01.lrit``
+Parses LRIT file and displays header information in a human-readable format.
 ```
+usage: lrit-header.py [-h] [-f PATH]
+
+Parses LRIT file and displays header information in a human-readable format.
+
+optional arguments:
+  -h, --help  show this help message and exit
+  -f PATH     Input LRIT file
+```
+
+### Sample output
+```
+python3.6 lrit-header.py -f samples/lrit/IMG_ENH_01_IR1_20120101_000920_01.lrit
 [Type 0 : Offset 0x0] Primary Header:
 	Header length:         16
 	File type:             0, Image data (IMG)
