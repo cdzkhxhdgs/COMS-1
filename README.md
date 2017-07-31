@@ -144,9 +144,9 @@ LRIT and HRIT sample data was obtained from [Korea Meteorological Administration
 Image obtained from [KMA NMSC](http://nmsc.kma.go.kr/html/homepage/en/satellite/searchSatelliteImageN.do?data_type=1001)
 
 ### Additional Data (ADD)
-Additional Data refers to:
+Additional Data types:
  * [Alpha-numeric Text (ANT)](#alpha-numeric-text-ant)
- * COMS Meteorological Data Processing System (CMDPS) analysis data
+ * [COMS Meteorological Data Processing System (CMDPS) analysis data](#cmdps)
  * Numerical Weather Prediction (NWP) data
  * Geostationary Ocean Color Imager (GOCI) data
  * KMA typhoon information
@@ -182,7 +182,7 @@ TIME(UTC)        LRIT    ABBR_ID 02 03 04 05 06 07 08
 ```
 Alpha-numeric Text sample continued in [samples/lrit/ADD_ANT_01_20120101_113500_00_DATA.txt](samples/lrit/ADD_ANT_01_20120101_113500_00_DATA.txt)
 
-#### Cloud images
+#### CMDPS
 Cloud Type (CT) | Cloud Top Height (CTH) | Cloud Top Temperature (CTT)
 ------------ | ------------- | -------------
 ![Cloud Type (CT)](samples/lrit/ADD_CT_02_20120101_032800_00_DATA.png) | ![Cloud Top Height (CTH)](samples/lrit/ADD_CTH_02_20120101_033200_00_DATA.png) | ![Cloud Top Temperature (CTT)](samples/lrit/ADD_CTT_02_20120101_033500_00_DATA.png)
