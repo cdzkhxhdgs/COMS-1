@@ -4,7 +4,8 @@ Tools for COMS-1 LRIT satellite data. Requires Python 3.
 | Component     | Description   |
 | ------------- | ------------- |
 | [lrit-header.py](#lrit-headerpy)  | Parses LRIT file and displays header information in a human-readable format.  |
-| [lrit-additional.py](lrit-additionalpy)  | Extracts data from LRIT Additional Data (ADD) files.  |
+| [lrit-additional.py](#lrit-additionalpy)  | Extracts data from LRIT Additional Data (ADD) files.  |
+| [coms.py](coms.py) | Common functions and variables. |
 
 ## lrit-header.py
 Parses LRIT file and displays header information in a human-readable format.
