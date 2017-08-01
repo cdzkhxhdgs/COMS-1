@@ -77,6 +77,17 @@ python3.6 lrit-header.py -f samples/lrit/IMG_ENH_01_IR1_20120101_000920_01.lrit
 ## lrit-additional.py
 Extracts data from LRIT Additional Data (ADD) files. Data includes Alpha-numeric text (ANT), CMDPS (CT/CTT/CTH), and GOCI.
 
+```
+usage: lrit-additional.py [-h] [-f PATH]
+
+Extracts data from LRIT Additional Data (ADD) files. Data includes Alpha-
+numeric text (ANT), CMDPS (CT/CTT/CTH), and GOCI.
+
+optional arguments:
+  -h, --help  show this help message and exit
+  -f PATH     Input LRIT file
+```
+
 ### Sample output (Alpha-numeric Text)
 ```
 python3.6 lrit-additional.py -f samples/lrit/ADD_ANT_01_20120101_113500_00.lrit
