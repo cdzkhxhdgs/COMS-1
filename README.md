@@ -10,13 +10,15 @@ Tools for COMS-1 LRIT satellite data. Requires Python 3.
 ## lrit-header.py
 Parses LRIT file and displays header information in a human-readable format.
 ```
-usage: lrit-header.py [-h] [-f PATH]
+usage: lrit-header.py [-h] PATH
 
 Parses LRIT file and displays header information in a human-readable format.
 
+positional arguments:
+  PATH        Input LRIT file
+
 optional arguments:
   -h, --help  show this help message and exit
-  -f PATH     Input LRIT file
 ```
 
 ### Sample output
@@ -78,14 +80,16 @@ python3.6 lrit-header.py -f samples/lrit/IMG_ENH_01_IR1_20120101_000920_01.lrit
 Extracts data from LRIT Additional Data (ADD) files. Data includes Alpha-numeric text (ANT), CMDPS (CT/CTT/CTH), and GOCI.
 
 ```
-usage: lrit-additional.py [-h] [-f PATH]
+usage: lrit-additional.py [-h] PATH
 
 Extracts data from LRIT Additional Data (ADD) files. Data includes Alpha-
 numeric text (ANT), CMDPS (CT/CTT/CTH), and GOCI.
 
+positional arguments:
+  PATH        Input LRIT file
+
 optional arguments:
   -h, --help  show this help message and exit
-  -f PATH     Input LRIT file
 ```
 
 ### Sample output (Alpha-numeric Text)
