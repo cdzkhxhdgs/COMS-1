@@ -5,7 +5,7 @@ Tools for COMS-1 LRIT satellite data. Requires Python 3.
 | ------------- | ------------- |
 | [lrit-header.py](#lrit-headerpy)  | Parses LRIT file and displays header information in a human-readable format.  |
 | [lrit-additional.py](#lrit-additionalpy)  | Extracts data from LRIT Additional Data (ADD) files.  |
-| [coms.py](coms.py) | Common functions and variables. |
+| [coms.py](coms.py) | Variables and methods for COMS-1 LRIT parsing. |
 
 ## lrit-header.py
 Parses LRIT file and displays header information in a human-readable format.
@@ -63,7 +63,7 @@ python3.6 lrit-header.py samples/lrit/IMG_ENH_01_IR1_20120101_000920_01.lrit
 	  - Time code ID:      100 (1958 January 1 epoch - Level 1 Time Code)
 	  - Detail bits:       0000
 	T Field:               010011010000101000000101000110001110111010000000
-	  - Day counter:       19722 (01/01/2012 - DD/MM/YYYY)
+	  - Day counter:       19722 (31/12/2011 - DD/MM/YYYY)
 	  - Milliseconds:      85520000 (23:45:20 - HH:MM:SS)
 
 [Type 007 : Offset 0x1349] Key Header:
