@@ -95,17 +95,17 @@ optional arguments:
 ### Sample output (Alpha-numeric Text)
 ```
 python3.6 lrit-additional.py samples/lrit/ADD_ANT_01_20120101_113500_00.lrit
-[Type 0 : Offset 0x0] Primary Header:
+[Type 000 : Offset 0x0000] Primary Header:
 	Header length:         16 (0x10)
 	File type:             2, Alpha-numeric text (ANT)
 	Total header length:   70 (0x46)
 	Data length:           78088 (0x13108)
 
-[Type 4 : Offset 0x10] Annotation Header:
+[Type 004 : Offset 0x0010] Annotation Header:
 	Header length:         37 (0x25)
 	Text data:             "ADD_ANT_01_20120101_113500_00.lrit"
 
-[Type 5 : Offset 0x35] Time Stamp Header:
+[Type 005 : Offset 0x0035] Time Stamp Header:
 	Header length:         10 (0xA)
 	P Field:               01000000
 	  - Extension flag:    0 (No extension)
@@ -115,9 +115,10 @@ python3.6 lrit-additional.py samples/lrit/ADD_ANT_01_20120101_113500_00.lrit
 	  - Day counter:       19723 (02/01/2012 - DD/MM/YYYY)
 	  - Milliseconds:      20489859 (05:41:29 - HH:MM:SS)
 
-[Type 7 : Offset 0x3F] Key Header:
+[Type 007 : Offset 0x003F] Key Header:
 	Header length:         7 (0x7)
 	Encryption key:        0x0 (disabled)
+
 
 Additional Data dumped to "samples/lrit/ADD_ANT_01_20120101_113500_00_DATA.txt"
 ```
@@ -125,17 +126,17 @@ Additional Data dumped to "samples/lrit/ADD_ANT_01_20120101_113500_00_DATA.txt"
 ### Sample output (CMDPS - CTH)
 ```
 python3.6 lrit-additional.py samples/lrit/ADD_CTH_02_20120101_033200_00.lrit
-[Type 0 : Offset 0x0] Primary Header:
+[Type 000 : Offset 0x0000] Primary Header:
 	Header length:         16 (0x10)
 	File type:             128, COMS Meteorological Data Processing System (CMDPS) analysis data
 	Total header length:   70 (0x46)
 	Data length:           4689808 (0x478F90)
 
-[Type 4 : Offset 0x10] Annotation Header:
+[Type 004 : Offset 0x0010] Annotation Header:
 	Header length:         37 (0x25)
 	Text data:             "ADD_CTH_02_20120101_033200_00.lrit"
 
-[Type 5 : Offset 0x35] Time Stamp Header:
+[Type 005 : Offset 0x0035] Time Stamp Header:
 	Header length:         10 (0xA)
 	P Field:               01000000
 	  - Extension flag:    0 (No extension)
@@ -145,9 +146,10 @@ python3.6 lrit-additional.py samples/lrit/ADD_CTH_02_20120101_033200_00.lrit
 	  - Day counter:       19723 (02/01/2012 - DD/MM/YYYY)
 	  - Milliseconds:      11196783 (03:06:36 - HH:MM:SS)
 
-[Type 7 : Offset 0x3F] Key Header:
+[Type 007 : Offset 0x003F] Key Header:
 	Header length:         7 (0x7)
 	Encryption key:        0x0 (disabled)
+
 
 Additional Data dumped to "samples/lrit/ADD_CTH_02_20120101_033200_00_DATA.png"
 ```
