@@ -23,14 +23,14 @@ optional arguments:
 
 ### Sample output
 ```
-python3.6 lrit-header.py -f samples/lrit/IMG_ENH_01_IR1_20120101_000920_01.lrit
-[Type 0 : Offset 0x0] Primary Header:
+python3.6 lrit-header.py samples/lrit/IMG_ENH_01_IR1_20120101_000920_01.lrit
+[Type 000 : Offset 0x0000] Primary Header:
 	Header length:         16 (0x10)
 	File type:             0, Image data (IMG)
 	Total header length:   4972 (0x136C)
 	Data length:           3824184 (0x3A5A38)
 
-[Type 1 : Offset 0x10] Image Structure Header:
+[Type 001 : Offset 0x0010] Image Structure Header:
 	Header length:         9 (0x9)
 	Bits per pixel:        8
 	Image:                 Extended Northern Hemisphere (ENH)
@@ -38,7 +38,7 @@ python3.6 lrit-header.py -f samples/lrit/IMG_ENH_01_IR1_20120101_000920_01.lrit
 	  - Lines:   309
 	Compression:           0, None
 
-[Type 2 : Offset 0x19] Image Navigation Header:
+[Type 002 : Offset 0x0019] Image Navigation Header:
 	Header length:         51 (0x33)
 	Projection:            Normalized Geostationary Projection (GEOS)
 	Longitude:             128.2° E
@@ -47,16 +47,16 @@ python3.6 lrit-header.py -f samples/lrit/IMG_ENH_01_IR1_20120101_000920_01.lrit
 	Column offset:         773
 	Line offset:           1010
 
-[Type 3 : Offset 0x4C] Image Data Function Header:
+[Type 003 : Offset 0x004C] Image Data Function Header:
 	Header length:         4810 (0x12CA)
 	Data Definition Block:
 	  - dumped to "samples/lrit/IMG_ENH_01_IR1_20120101_000920_01_IDF-DDB.txt"
 
-[Type 4 : Offset 0x1316] Annotation Header:
+[Type 004 : Offset 0x1316] Annotation Header:
 	Header length:         41 (0x29)
 	Text data:             "IMG_ENH_01_IR1_20120101_000920_01.lrit"
 
-[Type 5 : Offset 0x133F] Time Stamp Header:
+[Type 005 : Offset 0x133F] Time Stamp Header:
 	Header length:         10 (0xA)
 	P Field:               01000000
 	  - Extension flag:    0 (No extension)
@@ -66,14 +66,14 @@ python3.6 lrit-header.py -f samples/lrit/IMG_ENH_01_IR1_20120101_000920_01.lrit
 	  - Day counter:       19722 (01/01/2012 - DD/MM/YYYY)
 	  - Milliseconds:      85520000 (23:45:20 - HH:MM:SS)
 
-[Type 7 : Offset 0x1349] Key Header:
+[Type 007 : Offset 0x1349] Key Header:
 	Header length:         7 (0x7)
 	Encryption key:        0x0 (disabled)
 
-[Type 128 : Offset 0x1350] Image Segment Definition Header:
+[Type 128 : Offset 0x1350] Image Segmentation Information Header:
 	Header length:         7 (0x7)
 	Segment number:        1 of 4
-	Line num of segment:   1
+	Line num of image:     1
 ```
 
 ## lrit-additional.py
@@ -94,7 +94,7 @@ optional arguments:
 
 ### Sample output (Alpha-numeric Text)
 ```
-python3.6 lrit-additional.py -f samples/lrit/ADD_ANT_01_20120101_113500_00.lrit
+python3.6 lrit-additional.py samples/lrit/ADD_ANT_01_20120101_113500_00.lrit
 [Type 0 : Offset 0x0] Primary Header:
 	Header length:         16 (0x10)
 	File type:             2, Alpha-numeric text (ANT)
@@ -124,7 +124,7 @@ Additional Data dumped to "samples/lrit/ADD_ANT_01_20120101_113500_00_DATA.txt"
 
 ### Sample output (CMDPS - CTH)
 ```
-python3.6 lrit-additional.py -f samples/lrit/ADD_CTH_02_20120101_033200_00.lrit
+python3.6 lrit-additional.py samples/lrit/ADD_CTH_02_20120101_033200_00.lrit
 [Type 0 : Offset 0x0] Primary Header:
 	Header length:         16 (0x10)
 	File type:             128, COMS Meteorological Data Processing System (CMDPS) analysis data
