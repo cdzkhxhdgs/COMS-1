@@ -3,8 +3,9 @@ Tools for COMS-1 LRIT satellite data. Requires Python 3.
 
 | Component     | Description   |
 | ------------- | ------------- |
-| [lrit-header.py](#lrit-headerpy)  | Parses LRIT file and displays header information in a human-readable format.  |
-| [lrit-additional.py](#lrit-additionalpy)  | Extracts data from LRIT Additional Data (ADD) files.  |
+| [lrit-header.py](#lrit-headerpy) | Parses LRIT file and displays header information in a human-readable format. |
+| [lrit-img.py](#lrit-imgpy) | Extracts Meteorological Imager data from LRIT Image (IMG) files. |
+| [lrit-additional.py](#lrit-additionalpy) | Extracts data from LRIT Additional Data (ADD) files. |
 | [coms.py](coms.py) | Variables and methods for COMS-1 LRIT parsing. |
 
 ## lrit-header.py
@@ -75,6 +76,100 @@ python3.6 lrit-header.py samples/lrit/IMG_ENH_01_IR1_20120101_000920_01.lrit
 	Segment number:        1 of 4
 	Line num of image:     1
 ```
+
+## lrit-img.py
+Extracts Meteorological Imager data from LRIT Image (IMG) files.
+Image segments are individually dumped and appended to the same binary BIN file, which can then be converted to a bitmap image using [ImageMagick](https://www.imagemagick.org).
+```
+usage: lrit-img.py [-h] INPUT OUTPUT
+
+Extracts Meteorological Imager data from LRIT Image (IMG) files.
+
+positional arguments:
+  INPUT       Input LRIT file
+  OUTPUT      Output path of BIN file
+
+optional arguments:
+  -h, --help  show this help message and exit
+```
+
+### ImageMagick
+[ImageMagick](https://www.imagemagick.org) is used to convert the binary file into bitmap images with the following command:
+```
+convert -size [WIDTH]x[HEIGHT] -depth 8 gray:output.bin image.bmp
+```
+
+#### Image dimensions
+| Image type | Dimensions (WxH) |
+| ---------- | ---------------- |
+| Full Disk (FD) | 2000x2000 |
+| Extended Northern Hemisphere (ENH) | 1547x1234 |
+| Limited Southern Hemisphere (LSH) | 1547x636 |
+| Asia and Pacific in Northern Hemisphere (APNH) | 810x611 |
+
+
+### Sample output
+```
+python3.6 lrit-img.py samples/lrit/IMG_ENH_01_WV_20120101_000920_01.lrit output.bin
+[Type 000 : Offset 0x0000] Primary Header:
+	Header length:         16 (0x10)
+	File type:             0, Image data (IMG)
+	Total header length:   4971 (0x136B)
+	Data length:           3824184 (0x3A5A38)
+
+[Type 001 : Offset 0x0010] Image Structure Header:
+	Header length:         9 (0x9)
+	Bits per pixel:        8
+	Image:                 Extended Northern Hemisphere (ENH)
+	  - Columns: 1547
+	  - Lines:   309
+	Compression:           0, None
+
+[Type 002 : Offset 0x0019] Image Navigation Header:
+	Header length:         51 (0x33)
+	Projection:            Normalized Geostationary Projection (GEOS)
+	Longitude:             128.2° E
+	Column scaling factor: 8170135
+	Line scaling factor:   4286797161
+	Column offset:         773
+	Line offset:           1010
+
+[Type 003 : Offset 0x004C] Image Data Function Header:
+	Header length:         4810 (0x12CA)
+	Data Definition Block:
+	  - dumped to "samples/lrit/IMG_ENH_01_WV_20120101_000920_01_IDF-DDB.txt"
+
+[Type 004 : Offset 0x1316] Annotation Header:
+	Header length:         40 (0x28)
+	Text data:             "IMG_ENH_01_WV_20120101_000920_01.lrit"
+
+[Type 005 : Offset 0x133E] Time Stamp Header:
+	Header length:         10 (0xA)
+	P Field:               01000000
+	  - Extension flag:    0 (No extension)
+	  - Time code ID:      100 (1958 January 1 epoch - Level 1 Time Code)
+	  - Detail bits:       0000
+	T Field:               010011010000101000000101000110001110111010000000
+	  - Day counter:       19722 (31/12/2011 - DD/MM/YYYY)
+	  - Milliseconds:      85520000 (23:45:20 - HH:MM:SS)
+
+[Type 007 : Offset 0x1348] Key Header:
+	Header length:         7 (0x7)
+	Encryption key:        0x0 (disabled)
+
+[Type 128 : Offset 0x134F] Image Segmentation Information Header:
+	Header length:         7 (0x7)
+	Segment number:        1 of 4
+	Line num of image:     1
+
+Image data dumped to "output.bin"
+```
+
+### Sample images
+Visible (VIS) | Infrared (IR) | Water Vapour (WV)
+------------ | ------------- | -------------
+![Extended Northern Hemisphere (ENH) Visible](samples/ENH_VIS.bmp) | ![Extended Northern Hemisphere (ENH) IR](samples/ENH_IR.bmp) | ![Extended Northern Hemisphere (ENH) Water Vapour](samples/ENH_WV.bmp)
+
 
 ## lrit-additional.py
 Extracts data from LRIT Additional Data (ADD) files. Data includes Alpha-numeric text (ANT), CMDPS (CT/CTT/CTH), and GOCI.
