@@ -80,7 +80,7 @@ python3.6 lrit-header.py samples/lrit/IMG_ENH_01_IR1_20120101_000920_01.lrit
 
 ## lrit-img.py
 Extracts Meteorological Imager data from LRIT Image (IMG) files.
-Image segments are individually dumped and appended to the same binary BIN file, which can then be converted to a bitmap image using [ImageMagick](https://www.imagemagick.org).
+Image segments are individually dumped and appended to the same binary BIN file.
 ```
 usage: lrit-img.py [-h] [-i] [-o] [-m] [-f F] INPUT OUTPUT
 
