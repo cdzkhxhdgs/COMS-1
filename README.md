@@ -1,12 +1,13 @@
 # COMS-1
 Tools for COMS-1 LRIT satellite data. Requires Python 3.
 
-| Component     | Description   |
-| ------------- | ------------- |
-| [lrit-header.py](#lrit-headerpy) | Parses LRIT file and displays header information in a human-readable format. |
-| [lrit-img.py](#lrit-imgpy) | Extracts Meteorological Imager data from LRIT Image (IMG) files. |
-| [lrit-additional.py](#lrit-additionalpy) | Extracts data from LRIT Additional Data (ADD) files. |
-| [coms.py](coms.py) | Variables and methods for COMS-1 LRIT parsing. |
+| Component     | Description   | Dependencies  |
+| ------------- | ------------- | ------------- |
+| [lrit-header.py](#lrit-headerpy) | Parses LRIT file and displays header information in a human-readable format. | argparse |
+| [lrit-img.py](#lrit-imgpy) | Extracts Meteorological Imager data from LRIT Image (IMG) files. | argparse, glob, os, subprocess |
+| [overlay.py](#overlaypy) | Adds overlays and text to COMS-1 Meteorological Imager images. | argparse, pillow (PIL) |
+| [lrit-additional.py](#lrit-additionalpy) | Extracts data from LRIT Additional Data (ADD) files. | argparse |
+| [coms.py](coms.py) | Variables and methods for COMS-1 LRIT parsing. | datetime |
 
 ## lrit-header.py
 Parses LRIT file and displays header information in a human-readable format.
@@ -81,22 +82,26 @@ python3.6 lrit-header.py samples/lrit/IMG_ENH_01_IR1_20120101_000920_01.lrit
 Extracts Meteorological Imager data from LRIT Image (IMG) files.
 Image segments are individually dumped and appended to the same binary BIN file, which can then be converted to a bitmap image using [ImageMagick](https://www.imagemagick.org).
 ```
-usage: lrit-img.py [-h] INPUT OUTPUT
+usage: lrit-img.py [-h] [-i] [-o] [-m] [-f F] INPUT OUTPUT
 
 Extracts Meteorological Imager data from LRIT Image (IMG) files.
 
 positional arguments:
-  INPUT       Input LRIT file
-  OUTPUT      Output path of BIN file
+  INPUT       Input LRIT file/folder path
+  OUTPUT      Output BIN file path
 
 optional arguments:
   -h, --help  show this help message and exit
+  -i          Generate BMP from BIN file
+  -o          Add info text to generated BMP (assumes -i)
+  -m          Add map overlay to generated BMP (assumes -i)
+  -f F        Overlay text fill colour
 ```
 
-### ImageMagick
-[ImageMagick](https://www.imagemagick.org) is used to convert the binary file into bitmap images with the following command:
+To add text or map overlays once the image is generated, include `-o` and `-m` respectively.
+LRIT headers are used to generate info text for the image in the format:
 ```
-convert -size [WIDTH]x[HEIGHT] -depth 8 gray:output.bin image.bmp
+COMS-1 [Image Type] - [Channel]               [DD/MM/YYYY] [HH:MM:SS] UTC
 ```
 
 #### Image dimensions
@@ -165,10 +170,38 @@ python3.6 lrit-img.py samples/lrit/IMG_ENH_01_WV_20120101_000920_01.lrit output.
 Image data dumped to "output.bin"
 ```
 
+Sample BIN files can be found in `samples/*.bin`
+
 ### Sample images
 Visible (VIS) | Infrared (IR) | Water Vapour (WV)
 ------------ | ------------- | -------------
 ![Extended Northern Hemisphere (ENH) Visible](samples/ENH_VIS.bmp) | ![Extended Northern Hemisphere (ENH) IR](samples/ENH_IR.bmp) | ![Extended Northern Hemisphere (ENH) Water Vapour](samples/ENH_WV.bmp)
+
+
+## overlay.py
+Adds overlays and text to COMS-1 Meteorological Imager images using PIL (pillow).
+
+```
+usage: overlay.py [-h] [-m] [-f F] INPUT OUTPUT LEFT RIGHT
+
+Adds overlays and text to COMS-1 Meteorological Imager images.
+
+positional arguments:
+  INPUT       Input BMP file
+  OUTPUT      Output BMP file
+  LEFT        Left text
+  RIGHT       Right text
+
+optional arguments:
+  -h, --help  show this help message and exit
+  -m          Enable map overlay
+  -f F        Text fill colour
+```
+
+### Sample images
+Visible (VIS) | Infrared (IR) | Water Vapour (WV)
+------------ | ------------- | -------------
+![Extended Northern Hemisphere (ENH) Visible with info text](samples/ENH_VIS_overlay.bmp) | ![Extended Northern Hemisphere (ENH) IR with info text](samples/ENH_IR_overlay.bmp) | ![Extended Northern Hemisphere (ENH) Water Vapour with info text](samples/ENH_WV_overlay.bmp)
 
 
 ## lrit-additional.py
