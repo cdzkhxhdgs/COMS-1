@@ -1,10 +1,11 @@
 # COMS-1
-Tools for COMS-1 LRIT satellite data. Requires Python 3.
+Tools for COMS-1 xRIT satellite data. Requires Python 3.
 
 | Component     | Description   | Dependencies  |
 | ------------- | ------------- | ------------- |
 | [lrit-header.py](#lrit-headerpy) | Parses LRIT file and displays header information in a human-readable format. |  |
-| [lrit-img.py](#lrit-imgpy) | Extracts Meteorological Imager data from LRIT Image (IMG) files. |  |
+| [lrit-img.py](#lrit-imgpy) | Extracts Meteorological Imager data from LRIT Image (IMG) files. | Pillow (PIL) |
+| [hrit-img.py](#hrit-imgpy) | Extracts Meteorological Imager data from HRIT Image (IMG) files. | Pillow (PIL) |
 | [overlay.py](#overlaypy) | Adds overlays and text to COMS-1 Meteorological Imager images. | Pillow (PIL) |
 | [lrit-additional.py](#lrit-additionalpy) | Extracts data from LRIT Additional Data (ADD) files. |  |
 | [coms.py](coms.py) | Variables and methods for COMS-1 LRIT parsing. |  |
@@ -101,7 +102,7 @@ optional arguments:
 To add text or map overlays once the image is generated, include `-o` and `-m` respectively.
 LRIT headers are used to generate info text for the image in the format:
 ```
-COMS-1 [Image Type] - [Channel]               [DD/MM/YYYY] [HH:MM:SS] UTC
+COMS-1 LRIT [Image Type] - [Channel]                      [DD/MM/YYYY] [HH:MM:SS] UTC
 ```
 
 #### Image dimensions
@@ -114,6 +115,7 @@ COMS-1 [Image Type] - [Channel]               [DD/MM/YYYY] [HH:MM:SS] UTC
 
 
 ### Sample output
+#### Single LRIT IMG segment
 ```
 python3.6 lrit-img.py samples/lrit/IMG_ENH_01_WV_20120101_000920_01.lrit output.bin
 [Type 000 : Offset 0x0000] Primary Header:
@@ -170,12 +172,113 @@ python3.6 lrit-img.py samples/lrit/IMG_ENH_01_WV_20120101_000920_01.lrit output.
 Image data dumped to "output.bin"
 ```
 
+#### Folder of LRIT IMG segments
+```
+python3.6 lrit-img.py samples/lrit/IMG bmp/output.bin -i -o
+Detecting IMG segments...
+Found 4 segments: 
+ - samples/lrit/IMG/IMG_ENH_01_IR1_20120101_000920_01.lrit
+ - samples/lrit/IMG/IMG_ENH_01_IR1_20120101_000920_02.lrit
+ - samples/lrit/IMG/IMG_ENH_01_IR1_20120101_000920_03.lrit
+ - samples/lrit/IMG/IMG_ENH_01_IR1_20120101_000920_04.lrit
+
+Image data dumped to "bmp/output.bin"
+
+BMP image generated
+
+Left text: "COMS-1 LRIT Extended Northern Hemisphere (ENH) - IR1"
+Right text: "31/12/2011 23:45:20 UTC"
+Modified image saved to bmp/output_overlay.bmp
+Info text added to BMP
+```
+
 Sample BIN files can be found in `samples/*.bin`
 
 ### Sample images
 Visible (VIS) | Infrared (IR) | Water Vapour (WV)
 ------------ | ------------- | -------------
 ![Extended Northern Hemisphere (ENH) Visible](samples/ENH_VIS.bmp) | ![Extended Northern Hemisphere (ENH) IR](samples/ENH_IR.bmp) | ![Extended Northern Hemisphere (ENH) Water Vapour](samples/ENH_WV.bmp)
+
+
+## hrit-img.py
+Extracts Meteorological Imager data from HRIT Image (IMG) files.
+Image segments are individually dumped and appended to the same binary BIN file.
+
+```
+usage: hrit-img.py [-h] [-i] [-o] [-m] [-f F] INPUT OUTPUT
+
+Extracts Meteorological Imager data from HRIT Image (IMG) files.
+
+positional arguments:
+  INPUT       Input HRIT file/folder path
+  OUTPUT      Output BIN file path
+
+optional arguments:
+  -h, --help  show this help message and exit
+  -i          Generate BMP from BIN file
+  -o          Add info text to generated BMP (assumes -i)
+  -m          Add map overlay to generated BMP (assumes -i)
+  -f F        Overlay text fill colour
+```
+
+To add text or map overlays once the image is generated, include `-o` and `-m` respectively.
+HRIT headers are used to generate info text for the image in the format:
+```
+COMS-1 HRIT [Image Type] - [Channel]                      [DD/MM/YYYY] [HH:MM:SS] UTC
+```
+
+#### Image dimensions
+| Image type | VIS Dimensions (WxH) | IR Dimensions (WxH) |
+| ---------- | -------------------- | ------------------- |
+| Full Disk (FD) | 11000x11000 | 2750x2750 |
+| Extended Northern Hemisphere (ENH) | 7736x6176 | 1934x1544 |
+| Limited Southern Hemisphere (LSH) | 7736x3184 | 1934x796 |
+| Asia and Pacific in Northern Hemisphere (APNH) | 4056x3060 | 1014x765 |
+
+### Sample output
+#### Single HRIT IMG segment
+```
+python3.6 hrit-img.py samples/hrit/IMG_FD_01_IR1_20120101_024020_01.hrit bmp/out.bin -i -o
+
+Deleted existing BIN file: bmp/out.bin
+Image data dumped to "bmp/out.bin"
+
+BMP image generated
+
+Left text: "COMS-1 HRIT Full Disk (FD) - IR1"
+Right text: "01/01/2012 02:15:20 UTC"
+Modified image saved to bmp/out_overlay.bmp
+Info text added to BMP
+```
+
+#### Folder of HRIT IMG segments
+```
+python3.6 hrit-img.py samples/hrit bmp/out.bin -i -o
+Detecting IMG segments...
+Found 10 segments: 
+ - samples/hrit/IMG_FD_01_IR1_20120101_024020_01.hrit
+ - samples/hrit/IMG_FD_01_IR1_20120101_024020_02.hrit
+ - samples/hrit/IMG_FD_01_IR1_20120101_024020_03.hrit
+ - samples/hrit/IMG_FD_01_IR1_20120101_024020_04.hrit
+ - samples/hrit/IMG_FD_01_IR1_20120101_024020_05.hrit
+ - samples/hrit/IMG_FD_01_IR1_20120101_024020_06.hrit
+ - samples/hrit/IMG_FD_01_IR1_20120101_024020_07.hrit
+ - samples/hrit/IMG_FD_01_IR1_20120101_024020_08.hrit
+ - samples/hrit/IMG_FD_01_IR1_20120101_024020_09.hrit
+ - samples/hrit/IMG_FD_01_IR1_20120101_024020_10.hrit
+
+Image data dumped to "bmp/out.bin"
+
+BMP image generated
+
+Left text: "COMS-1 HRIT Full Disk (FD) - IR1"
+Right text: "01/01/2012 02:15:20 UTC"
+Modified image saved to bmp/out_overlay.bmp
+Info text added to BMP
+```
+
+### Sample image
+![HRIT Full Disk (FD) IR1](samples/HRIT_FD_IR1.bmp)
 
 
 ## overlay.py
@@ -199,9 +302,9 @@ optional arguments:
 ```
 
 ### Sample images
-Visible (VIS) | Infrared (IR) | Water Vapour (WV)
------------- | ------------- | -------------
-![Extended Northern Hemisphere (ENH) Visible with info text](samples/ENH_VIS_overlay.bmp) | ![Extended Northern Hemisphere (ENH) IR with info text](samples/ENH_IR_overlay.bmp) | ![Extended Northern Hemisphere (ENH) Water Vapour with info text](samples/ENH_WV_overlay.bmp)
+Visible (VIS) | Infrared (IR) | Water Vapour (WV) | FD IR |
+------------ | ------------- | ------------- | ------- |
+![Extended Northern Hemisphere (ENH) Visible with info text](samples/ENH_VIS_overlay.bmp) | ![Extended Northern Hemisphere (ENH) IR with info text](samples/ENH_IR_overlay.bmp) | ![Extended Northern Hemisphere (ENH) Water Vapour with info text](samples/ENH_WV_overlay.bmp) | ![Full Disk IR](samples/HRIT_FD_IR1_OVERLAY.bmp)
 
 
 ## lrit-additional.py
