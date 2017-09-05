@@ -3,11 +3,11 @@ Tools for COMS-1 LRIT satellite data. Requires Python 3.
 
 | Component     | Description   | Dependencies  |
 | ------------- | ------------- | ------------- |
-| [lrit-header.py](#lrit-headerpy) | Parses LRIT file and displays header information in a human-readable format. | argparse |
-| [lrit-img.py](#lrit-imgpy) | Extracts Meteorological Imager data from LRIT Image (IMG) files. | argparse, glob, os, subprocess |
-| [overlay.py](#overlaypy) | Adds overlays and text to COMS-1 Meteorological Imager images. | argparse, pillow (PIL) |
-| [lrit-additional.py](#lrit-additionalpy) | Extracts data from LRIT Additional Data (ADD) files. | argparse |
-| [coms.py](coms.py) | Variables and methods for COMS-1 LRIT parsing. | datetime |
+| [lrit-header.py](#lrit-headerpy) | Parses LRIT file and displays header information in a human-readable format. |  |
+| [lrit-img.py](#lrit-imgpy) | Extracts Meteorological Imager data from LRIT Image (IMG) files. |  |
+| [overlay.py](#overlaypy) | Adds overlays and text to COMS-1 Meteorological Imager images. | Pillow (PIL) |
+| [lrit-additional.py](#lrit-additionalpy) | Extracts data from LRIT Additional Data (ADD) files. |  |
+| [coms.py](coms.py) | Variables and methods for COMS-1 LRIT parsing. |  |
 
 ## lrit-header.py
 Parses LRIT file and displays header information in a human-readable format.
