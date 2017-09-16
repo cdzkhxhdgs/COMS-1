@@ -15,10 +15,10 @@ Parses xRIT file and displays header information in a human-readable format.
 ```
 usage: xrit-header.py [-h] PATH
 
-Parses LRIT file and displays header information in a human-readable format.
+Parses xRIT file and displays header information in a human-readable format.
 
 positional arguments:
-  PATH        Input LRIT file
+  PATH        Input xRIT file
 
 optional arguments:
   -h, --help  show this help message and exit
