@@ -3,17 +3,17 @@ Tools for COMS-1 xRIT satellite data. Requires Python 3.
 
 | Component     | Description   | Dependencies  |
 | ------------- | ------------- | ------------- |
-| [lrit-header.py](#lrit-headerpy) | Parses LRIT file and displays header information in a human-readable format. |  |
+| [xrit-header.py](#xrit-headerpy) | Parses xRIT file and displays header information in a human-readable format. |  |
 | [lrit-img.py](#lrit-imgpy) | Extracts Meteorological Imager data from LRIT Image (IMG) files. | Pillow (PIL) |
 | [hrit-img.py](#hrit-imgpy) | Extracts Meteorological Imager data from HRIT Image (IMG) files. | Pillow (PIL) |
 | [overlay.py](#overlaypy) | Adds overlays and text to COMS-1 Meteorological Imager images. | Pillow (PIL) |
 | [lrit-additional.py](#lrit-additionalpy) | Extracts data from LRIT Additional Data (ADD) files. |  |
 | [coms.py](coms.py) | Variables and methods for COMS-1 LRIT parsing. | jdcal |
 
-## lrit-header.py
-Parses LRIT file and displays header information in a human-readable format.
+## xrit-header.py
+Parses xRIT file and displays header information in a human-readable format.
 ```
-usage: lrit-header.py [-h] PATH
+usage: xrit-header.py [-h] PATH
 
 Parses LRIT file and displays header information in a human-readable format.
 
@@ -25,8 +25,9 @@ optional arguments:
 ```
 
 ### Sample output
+#### LRIT
 ```
-python3.6 lrit-header.py samples/lrit/IMG_ENH_01_IR1_20120101_000920_01.lrit
+python3.6 xrit-header.py samples/lrit/IMG_ENH_01_IR1_20120101_000920_01.lrit
 [Type 000 : Offset 0x0000] Primary Header:
 	Header length:         16 (0x10)
 	File type:             0, Image data (IMG)
@@ -35,7 +36,7 @@ python3.6 lrit-header.py samples/lrit/IMG_ENH_01_IR1_20120101_000920_01.lrit
 
 [Type 001 : Offset 0x0010] Image Structure Header:
 	Header length:         9 (0x9)
-	Bits per pixel:        8
+	Bits per pixel:        8 (0x8)
 	Image:                 Extended Northern Hemisphere (ENH)
 	  - Columns: 1547
 	  - Lines:   309
@@ -77,6 +78,84 @@ python3.6 lrit-header.py samples/lrit/IMG_ENH_01_IR1_20120101_000920_01.lrit
 	Header length:         7 (0x7)
 	Segment number:        1 of 4
 	Line num of image:     1
+
+[Type 131 : Offset 0x1357] Image Observation Time Header:
+	Header length:         21 (0x15)
+	MJD:                   55926.989814814646
+	Date:                  31/12/2011
+	Time:                  0.989814814645797
+```
+
+#### HRIT
+```
+python3.6 xrit-header.py samples/hrit/IMG_FD_01_IR1_20120101_024020_01.hrit
+[Type 000 : Offset 0x0000] Primary Header:
+	Header length:         16 (0x10)
+	File type:             0, Image data (IMG)
+	Total header length:   19654 (0x4CC6)
+	Data length:           12100000 (0xB8A1A0)
+
+[Type 001 : Offset 0x0010] Image Structure Header:
+	Header length:         9 (0x9)
+	Bits per pixel:        16 (0x10)
+	Image:                 Full Disk (FD)
+	  - Columns: 2750
+	  - Lines:   275
+	Compression:           0, None
+
+[Type 002 : Offset 0x0019] Image Navigation Header:
+	Header length:         51 (0x33)
+	Projection:            Normalized Geostationary Projection (GEOS)
+	Longitude:             128.2° E
+	Column scaling factor: 10212669
+	Line scaling factor:   4284754627
+	Column offset:         1374
+	Line offset:           1374
+
+[Type 003 : Offset 0x004C] Image Data Function Header:
+	Header length:         19379 (0x4BB3)
+	Data Definition Block:
+	  - dumped to "samples/hrit/IMG_FD_01_IR1_20120101_024020_01_IDF-DDB.txt"
+
+[Type 004 : Offset 0x4BFF] Annotation Header:
+	Header length:         40 (0x28)
+	Text data:             "IMG_FD_01_IR1_20120101_024020_01.hrit"
+
+[Type 005 : Offset 0x4C27] Time Stamp Header:
+	Header length:         10 (0xA)
+	P Field:               01000000
+	  - Extension flag:    0 (No extension)
+	  - Time code ID:      100 (1958 January 1 epoch - Level 1 Time Code)
+	  - Detail bits:       0000
+	T Field:               010011010000101100000000011110111110011011000000
+	  - Day counter:       19723 (01/01/2012 - DD/MM/YYYY)
+	  - Milliseconds:      8120000 (02:15:20 - HH:MM:SS)
+
+[Type 007 : Offset 0x4C31] Key Header:
+	Header length:         7 (0x7)
+	Encryption key:        0x0 (disabled)
+
+[Type 128 : Offset 0x4C38] Image Segmentation Information Header:
+	Header length:         7 (0x7)
+	Segment number:        1 of 10
+	Line num of image:     1
+
+[Type 130 : Offset 0x4C3F] Image Compensation Information Header:
+	Header length:         103 (0x67)
+	COFF = 1.37450000000E+03
+	CFAC = 1.02126690000E+07
+	LOFF = 1.37450000000E+03
+	LFAC = -1.02126690000E+07
+
+[Type 131 : Offset 0x4CA6] Image Observation Time Header:
+	Header length:         21 (0x15)
+	MJD:                   55927.093981481623
+	Date:                  01/01/2012
+	Time:                  0.09398148162290454
+
+[Type 132 : Offset 0x4CBB] Image Quality Information Header:
+	Header length:         11 (0xB)
+	Quality:               NO_ERROR
 ```
 
 ## lrit-img.py
