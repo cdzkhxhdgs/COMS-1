@@ -8,7 +8,7 @@ Tools for COMS-1 xRIT satellite data. Requires Python 3.
 | [hrit-img.py](#hrit-imgpy) | Extracts Meteorological Imager data from HRIT Image (IMG) files. | Pillow (PIL) |
 | [overlay.py](#overlaypy) | Adds overlays and text to COMS-1 Meteorological Imager images. | Pillow (PIL) |
 | [lrit-additional.py](#lrit-additionalpy) | Extracts data from LRIT Additional Data (ADD) files. |  |
-| [coms.py](coms.py) | Variables and methods for COMS-1 LRIT parsing. |  |
+| [coms.py](coms.py) | Variables and methods for COMS-1 LRIT parsing. | jdcal |
 
 ## lrit-header.py
 Parses LRIT file and displays header information in a human-readable format.
