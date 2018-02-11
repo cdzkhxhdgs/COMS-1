@@ -9,6 +9,7 @@ Tools for COMS-1 xRIT satellite data. Requires Python 3.
 | [overlay.py](#overlaypy) | Adds overlays and text to COMS-1 Meteorological Imager images. | Pillow (PIL) |
 | [lrit-additional.py](#lrit-additionalpy) | Extracts data from LRIT Additional Data (ADD) files. |  |
 | [coms.py](coms.py) | Variables and methods for COMS-1 LRIT parsing. | jdcal |
+| [keymsg-decrypt.py](#keymsg-decryptpy) | Decrypts KMA Encryption Key Message files for COMS-1 xRIT decryption | pyDes |
 
 ## xrit-header.py
 Parses xRIT file and displays header information in a human-readable format.
@@ -514,3 +515,97 @@ Alpha-numeric Text sample continued in [samples/lrit/ADD_ANT_01_20120101_113500_
 Cloud Type (CT) | Cloud Top Height (CTH) | Cloud Top Temperature (CTT)
 ------------ | ------------- | -------------
 ![Cloud Type (CT)](samples/lrit/ADD_CT_02_20120101_032800_00_DATA.png) | ![Cloud Top Height (CTH)](samples/lrit/ADD_CTH_02_20120101_033200_00_DATA.png) | ![Cloud Top Temperature (CTT)](samples/lrit/ADD_CTT_02_20120101_033500_00_DATA.png)
+
+
+## keymsg-decrypt.py
+Decrypts KMA Encryption Key Message files for COMS-1 xRIT decryption. Tested with example keys.
+```
+usage: keymsg-decrypt.py [-h] PATH MAC
+
+Decrypts KMA Encryption Key Message files for COMS-1 xRIT decryption
+
+positional arguments:
+  PATH        Encrypted Key Message file
+  MAC         Ground Station MAC address
+
+optional arguments:
+  -h, --help  show this help message and exit
+```
+
+### Sample output
+```
+python3.6 keymsg-decrypt.py EncryptionKeyMessage_001F2904C905.bin 001F2904C905
+Loading "EncryptionKeyMessage_001F2904C905.bin"...
+MAC: 001F2904C905
+
+Header: 2011020907300000
+CRC: E79B
+
+Application time: 09/02/2011 07:30:00
+
+[Index]: Encrypted Key
+[65   ]: 09D93692ED07867F858472F4ADE3BF7B
+[66   ]: 0D5EFC37229EC7AD858472F4ADE3BF7B
+[67   ]: D6572762B67E8367858472F4ADE3BF7B
+[68   ]: 9F8D6B078050782F858472F4ADE3BF7B
+[69   ]: E54D62E13C5E58BB858472F4ADE3BF7B
+[6A   ]: 89B4343618CBCB81858472F4ADE3BF7B
+[6B   ]: 10BE2D1C42B78900858472F4ADE3BF7B
+[6C   ]: 1950287EBAF18CFE858472F4ADE3BF7B
+[6D   ]: 6094FFB492885539858472F4ADE3BF7B
+[6E   ]: 6C91661A940BE109858472F4ADE3BF7B
+[6F   ]: 0C2CC49ECDAA7C92858472F4ADE3BF7B
+[70   ]: 5A9AF3A7865F5E60858472F4ADE3BF7B
+[71   ]: 970AB81C9CABE888858472F4ADE3BF7B
+[72   ]: 42E082A7F2A8CDC0858472F4ADE3BF7B
+[73   ]: B2E55ABFA6C0CC03858472F4ADE3BF7B
+[C9   ]: 9F722905E7E4360F858472F4ADE3BF7B
+[CA   ]: BA57E605BBAE6F3E858472F4ADE3BF7B
+[CB   ]: 1C9D771587FAC06A858472F4ADE3BF7B
+[CC   ]: 4374705D8E2507EF858472F4ADE3BF7B
+[CD   ]: 048E075345D09069858472F4ADE3BF7B
+[CE   ]: FF6A607A3C6968C3858472F4ADE3BF7B
+[CF   ]: 6120874E26A265AA858472F4ADE3BF7B
+[D0   ]: CF807AE29D43E66C858472F4ADE3BF7B
+[D1   ]: 2C6897E5BF31041A858472F4ADE3BF7B
+[D2   ]: B4FE12948A1B5E77858472F4ADE3BF7B
+[D3   ]: 8E987CDE6E255A86858472F4ADE3BF7B
+[D4   ]: A9924FE0DB865B5E858472F4ADE3BF7B
+[D5   ]: 26B0B776C1DBBA3F858472F4ADE3BF7B
+[D6   ]: D63C84973735A72B858472F4ADE3BF7B
+[D7   ]: DDC8F731567482C2858472F4ADE3BF7B
+
+[Index]: Decrypted Key
+[65   ]: 86DF04163DB93445
+[66   ]: 733B8089DF436B04
+[67   ]: 0237B52C9D5EE364
+[68   ]: 04386DCD3425D525
+[69   ]: 575E8F8AB3BCAB70
+[6A   ]: 80E0678551E39B23
+[6B   ]: A13BAD649258971A
+[6C   ]: 7086BFF831DCFB45
+[6D   ]: 89EAC2E32F853D8C
+[6E   ]: 9123C1236BDCBA46
+[6F   ]: 6D67B9208640E010
+[70   ]: 3B0779919DC237A4
+[71   ]: F140921F83E00B92
+[72   ]: 0E6807B9AD6E1343
+[73   ]: D9048616C1AE3DD0
+[C9   ]: 7ADFD0B53B0E25CB
+[CA   ]: D0F8897A373B519E
+[CB   ]: F7BF158315B016AB
+[CC   ]: 92FD04B6B6A1863B
+[CD   ]: 8C4AF75BCD4931F1
+[CE   ]: C4AD3752D5C19498
+[CF   ]: BAC48F5110DAA7CD
+[D0   ]: 513E6B1038321986
+[D1   ]: 158AE9FE4C3B838A
+[D2   ]: 3DE331265DDC4545
+[D3   ]: 2CD5C768945D7A79
+[D4   ]: 5E3EFEF8E5FB2C9E
+[D5   ]: 4AF4890298DC9B23
+[D6   ]: B6BFF4DA6BE3109D
+[D7   ]: A12A15205DDA16AB
+
+Output file: EncryptionKeyMessage_001F2904C905.bin.dec
+```
