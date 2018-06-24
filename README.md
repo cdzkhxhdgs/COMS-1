@@ -6,7 +6,7 @@ Tools for COMS-1 xRIT satellite data. Requires Python 3.
 | [xrit-header.py](#xrit-headerpy) | Parses xRIT file and displays header information in a human-readable format. |  |
 | [lrit-img.py](#lrit-imgpy) | Extracts Meteorological Imager data from LRIT Image (IMG) files. | Pillow (PIL) |
 | [hrit-img.py](#hrit-imgpy) | Extracts Meteorological Imager data from HRIT Image (IMG) files. | Pillow (PIL) |
-| [overlay.py](#overlaypy) | Adds overlays and text to COMS-1 Meteorological Imager images. | Pillow (PIL) |
+| [overlay.py](#overlaypy) | Adds overlays and text to COMS-1 Meteorological Imager images. | Pillow (PIL), pyshp |
 | [lrit-additional.py](#lrit-additionalpy) | Extracts data from LRIT Additional Data (ADD) files. |  |
 | [coms.py](coms.py) | Variables and methods for COMS-1 LRIT parsing. | jdcal |
 | [keymsg-decrypt.py](#keymsg-decryptpy) | Decrypts KMA Encryption Key Message files for COMS-1 xRIT decryption | pyDes |
@@ -534,14 +534,15 @@ optional arguments:
 
 ### Sample output
 ```
-python3.6 keymsg-decrypt.py EncryptionKeyMessage_001F2904C905.bin 001F2904C905
-Loading "EncryptionKeyMessage_001F2904C905.bin"...
+python3.6 keymsg-decrypt.py samples/decrypt/EncryptionKeyMessage_001F2904C905.bin 001F2904C905
+Loading "samples/decrypt/EncryptionKeyMessage_001F2904C905.bin"...
 MAC: 001F2904C905
 
-Header: 2011020907300000
-CRC: E79B
+Application Time header: 0x2011020907300000 (09/02/2011 07:30:00)
 
-Application time: 09/02/2011 07:30:00
+CRC16 Checksum: 0xE79B
+Calculated CRC: 0xE79B
+CRC Ok!
 
 [Index]: Encrypted Key
 [65   ]: 09D93692ED07867F858472F4ADE3BF7B
@@ -607,5 +608,5 @@ Application time: 09/02/2011 07:30:00
 [D6   ]: B6BFF4DA6BE3109D
 [D7   ]: A12A15205DDA16AB
 
-Output file: EncryptionKeyMessage_001F2904C905.bin.dec
+Output file: samples/decrypt/EncryptionKeyMessage_001F2904C905.bin.dec
 ```
