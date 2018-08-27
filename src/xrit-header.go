@@ -1,7 +1,12 @@
 package main
 
-import "coms"
+import (
+	"coms"
+	"os"
+)
 
 func main() {
-	coms.Init()
+	args := os.Args[1:]
+
+	coms.Init(args[0])
 }
