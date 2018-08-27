@@ -1,5 +1,5 @@
 # COMS-1
-Tools for COMS-1 xRIT satellite data. Requires Python 3.
+Tools for COMS-1 xRIT satellite data. Branch for testing and converting to Go 1.11.
 
 | Component     | Description   | Dependencies  |
 | ------------- | ------------- | ------------- |
