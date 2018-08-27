@@ -13,3 +13,6 @@
 
 # Data Definition Block dump file
 *IDF-DDB.txt
+
+# Go compiled packages
+pkg/
